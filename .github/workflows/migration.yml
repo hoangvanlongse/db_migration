@@ -24,18 +24,17 @@ jobs:
           --health-retries 5
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Install Liquibase
         run: |
           curl -LO https://github.com/liquibase/liquibase/releases/download/v4.27.0/liquibase-4.27.0.tar.gz
           tar -xzf liquibase-4.27.0.tar.gz
-          sudo ln -s $PWD/liquibase/liquibase /usr/local/bin/liquibase
+          chmod +x liquibase
 
       - name: Run Migration
         run: |
-          ./liquibase/liquibase \
+          ./liquibase \
             --url=jdbc:postgresql://postgres:5432/demo \
             --username=postgres \
             --password=123456 \
