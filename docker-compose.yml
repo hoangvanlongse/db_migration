@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
     ports:
-      - "5433:5433"
+      - "5433:5432"
   liquibase:
     image: liquibase/liquibase:4.27.0
     depends_on:
@@ -17,4 +17,8 @@ services:
     volumes:
       - ./:/liquibase/changelog
     command: >
-      --defaultsFile=/liquibase/changelog/liquibase.properties update
+      --url=jdbc:postgresql://postgres:5432/demo
+      --username=postgres
+      --password=123456
+      --changeLogFile=db/changelog.sql
+      update
