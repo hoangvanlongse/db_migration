@@ -35,8 +35,8 @@ jobs:
 
       - name: Run Migration
         run: |
-          liquibase \
-            --url=jdbc:postgresql://localhost:5432/demo \
+          ./liquibase/liquibase \
+            --url=jdbc:postgresql://postgres:5432/demo \
             --username=postgres \
             --password=123456 \
             --changeLogFile=db/changelog.sql \
